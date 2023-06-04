@@ -1,0 +1,40 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.video-container {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    overflow: hidden;
+}
+
+.scroll {
+    overflow: auto;
+    height: 100%;
+    width: 100%;
+}
+
+.scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.video {
+    height: 100%;
+}
+
+cmp-for-you-video {
+    display: block;
+    height: 100%;
+}
+
+@media only screen and (min-width: 600px) {
+    .video-container {
+        max-width: 420px;
+        max-height: 700px;
+    }
+}

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DynamicRef, DynamicRenderer } from './core/services/dynamic-renderer.service';
+import { DynamicRenderer } from './core/services/dynamic-renderer.service';
 import { ForYouComponent } from './modules/for-you/for-you.component';
 
 
@@ -15,6 +15,6 @@ export class AppComponent {
   }
 
   show() {
-    this.dynamicRenderer.appendChild(document.body, ForYouComponent);
+    this.dynamicRenderer.appendChildInOverlay(ForYouComponent);
   }
 }

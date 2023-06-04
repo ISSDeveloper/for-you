@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ForYouComponent } from './for-you.component';
+import { ForYouVideoComponent } from './for-you-video/for-you-video.component';
 
 
 
@@ -9,10 +10,11 @@ import { ForYouComponent } from './for-you.component';
     ForYouComponent
   ],
   declarations: [
-    ForYouComponent
+    ForYouComponent,
+    ForYouVideoComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
   ]
 })
 export class ForYouModule { }

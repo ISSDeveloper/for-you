@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { DynamicRef } from 'src/app/core/services/dynamic-renderer.service';
+import { Component, ViewChildren, QueryList, ElementRef } from '@angular/core';
+import { ForYouVideoComponent } from './for-you-video/for-you-video.component';
+import { DynamicRenderer } from 'src/app/core/services/dynamic-renderer.service';
 
 @Component({
   selector: 'cmp-for-you',
@@ -8,12 +9,11 @@ import { DynamicRef } from 'src/app/core/services/dynamic-renderer.service';
 })
 export class ForYouComponent {
 
+  constructor(private dynamicRenderer: DynamicRenderer) {
 
-  constructor(private dynamicRef: DynamicRef<ForYouComponent>) {
   }
 
-  voltar() {
-    this.dynamicRef.destroy();
+  onScroll() {
   }
 
 }

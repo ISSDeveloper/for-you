@@ -1,19 +1,7 @@
-<div class="video-header">
-    <span (click)="voltar()">Voltar</span>
-    <span class="divider"></span>
-    <strong>Para você</strong>
-</div>
-
-<div class="videos-container">
-    <div class="video">
-        <video #v src="assets/video.mp4" class="video-player"></video>
-        <div class="video-contant">
-            <div class="video-sidenav"></div>
-            <div class="video-footer"></div>
+<div class="container">
+    <div class="video-container">
+        <div class="scroll" (scroll)="onScroll()">
+            <cmp-for-you-video></cmp-for-you-video>
         </div>
     </div>
-</div>
-
-<div class="videos-footer">
-    oi
 </div>
