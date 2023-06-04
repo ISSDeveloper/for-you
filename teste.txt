@@ -1,0 +1,24 @@
+
+  // constructor(
+  //   private componentFactoryResolver: ComponentFactoryResolver,
+  //  private appRef: ApplicationRef,
+  //   private injector: Injector,
+  //   rendererFactory: RendererFactory2
+  // ) {
+  //   this.renderer = rendererFactory.createRenderer(document.body, null);
+  // }
+
+
+  // public open() {
+  //   const componentRef = this.createComponent(ForYouComponent);
+  //   const componetTemplateRef = this.getTemplateComponent(componentRef);
+
+  //   const appTemplateRef = this.getAppTemplateRef();
+
+  //   this.renderer.appendChild(appTemplateRef, componetTemplateRef);
+  // }
+
+  // private getAppTemplateRef() {
+  //   const appComponetRef: ComponentRef<AppComponent> = this.appRef.components[0];
+  //   return this.getTemplateComponent(appComponetRef);
+  // }
