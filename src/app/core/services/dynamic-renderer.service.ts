@@ -4,6 +4,7 @@ import { OverlayComponent } from 'src/app/shared/layout/overlay/overlay.componen
 export class DynamicRef<T> {
 
   protected componentRef: ComponentRef<T>;
+  protected parentRef: DynamicRef<T>;
 
   constructor(private appRef: ApplicationRef) {
   }
@@ -11,10 +12,18 @@ export class DynamicRef<T> {
   public destroy(): void {
     this.componentRef.destroy();
     this.appRef.detachView(this.componentRef.hostView);
+
+    if (this.parentRef) {
+      this.parentRef.destroy();
+    }
   }
 }
 
 class DynamicRefController<T> extends DynamicRef<T> {
+
+  setParentRef(parentRef: DynamicRef<any>) {
+    super.parentRef = parentRef;
+  }
 
   public setComponentRef(componentRef: ComponentRef<T>): void {
     super.componentRef = componentRef
@@ -43,36 +52,40 @@ export class DynamicRenderer {
    * @param component The type of the component to be appended.
    * @returns The reference to the dynamic component.
    */
-  public appendChild<T>(parent: HTMLElement, component: Type<T>): DynamicRef<T> {
+  public appendChild<T>(parent: HTMLElement, component: Type<T>, parentRef?: DynamicRef<any>): DynamicRef<T> {
 
     const dynamicRef = new DynamicRefController<T>(this.appRef);
 
-    const componentRef = this.createComponent(component, dynamicRef);
+    const componentRef = this.createComponent(component, dynamicRef, parentRef);
     const componetTemplateRef = this.getTemplateComponent(componentRef);
 
     this.renderer.appendChild(parent, componetTemplateRef);
 
-    dynamicRef.setComponentRef(componentRef);
     return dynamicRef;
   }
 
   public appendChildInOverlay<T>(component: Type<T>): DynamicRef<T> {
 
-    const overlayRef = this.createComponent(OverlayComponent);
+    const overlayDynamicRef = new DynamicRefController<T>(this.appRef);
+
+    const overlayRef = this.createComponent(OverlayComponent, overlayDynamicRef);
     const overlayTemplateRef = this.getTemplateComponent(overlayRef);
 
     this.renderer.appendChild(document.body, overlayTemplateRef);
 
     const overlayConent = overlayTemplateRef.querySelector(".overlay-conent") as HTMLElement;
 
-    return this.appendChild(overlayConent, component);
+    return this.appendChild(overlayConent, component, overlayDynamicRef);
   }
 
-  private createComponent<T>(type: Type<T>, dynamicRef?: DynamicRef<T>): ComponentRef<T> {
+  private createComponent<T>(type: Type<T>, dynamicRef?: DynamicRefController<T>, parentRef?: DynamicRef<any>): ComponentRef<T> {
 
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(type);
     const componentRef = componentFactory.create(dynamicRef ? this.createInjector(dynamicRef) : this.injector);
     this.appRef.attachView(componentRef.hostView);
+
+    dynamicRef.setComponentRef(componentRef);
+    dynamicRef.setParentRef(parentRef);
 
     return componentRef;
   }

@@ -15,8 +15,6 @@ export class AppComponent {
   }
 
   show() {
-    let dynamicRef: DynamicRef<ForYouComponent> = this.dynamicRenderer.appendChildInOverlay(ForYouComponent);
-
-    dynamicRef.destroy();
+    console.log(this.dynamicRenderer.appendChildInOverlay(ForYouComponent))
   }
 }
