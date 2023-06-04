@@ -1,4 +1,16 @@
-<div class="overlay">
-    <video src=""></video>
-    <button (click)="close()">Close</button>
+<div class="overlay" [style.height.px]="height">
+    <div class="overlay-video">
+        <video class="video" src="assets/video.mp4"></video>
+        <div class="video-shadow"></div>
+    </div>
+
+    <div class="overlay-panel">
+        <div class="for-you-header">
+            <span (click)="close()">voltar</span>
+        </div>
+    </div>
+
+    <div class="overlay-footer">
+                DAODADA
+    </div>
 </div>
