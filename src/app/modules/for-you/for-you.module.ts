@@ -5,6 +5,9 @@ import { ForYouComponent } from './for-you.component';
 
 
 @NgModule({
+  exports: [
+    ForYouComponent
+  ],
   declarations: [
     ForYouComponent
   ],

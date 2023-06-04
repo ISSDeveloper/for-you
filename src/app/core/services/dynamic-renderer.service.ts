@@ -1,4 +1,5 @@
 import { ApplicationRef, ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, Injectable, Injector, Renderer2, RendererFactory2, Type } from '@angular/core';
+import { OverlayComponent } from 'src/app/shared/layout/overlay/overlay.component';
 
 export class DynamicRef<T> {
 
@@ -55,10 +56,22 @@ export class DynamicRenderer {
     return dynamicRef;
   }
 
-  private createComponent<T>(type: Type<T>, dynamicRef: DynamicRef<T>): ComponentRef<T> {
+  public appendChildInOverlay<T>(component: Type<T>): DynamicRef<T> {
+
+    const overlayRef = this.createComponent(OverlayComponent);
+    const overlayTemplateRef = this.getTemplateComponent(overlayRef);
+
+    this.renderer.appendChild(document.body, overlayTemplateRef);
+
+    const overlayConent = overlayTemplateRef.querySelector(".overlay-conent") as HTMLElement;
+
+    return this.appendChild(overlayConent, component);
+  }
+
+  private createComponent<T>(type: Type<T>, dynamicRef?: DynamicRef<T>): ComponentRef<T> {
 
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(type);
-    const componentRef = componentFactory.create(this.createInjector(dynamicRef));
+    const componentRef = componentFactory.create(dynamicRef ? this.createInjector(dynamicRef) : this.injector);
     this.appRef.attachView(componentRef.hostView);
 
     return componentRef;
@@ -73,8 +86,8 @@ export class DynamicRenderer {
     });
   }
 
-  private getTemplateComponent(ComponentRef: ComponentRef<any>) {
-    return (ComponentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
+  private getTemplateComponent(componentRef: ComponentRef<any>) {
+    return (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
   }
 }
 

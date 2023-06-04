@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { ForYouModule } from './modules/for-you/for-you.module';
+import { OverlayModule } from './shared/layout/overlay/overlay.module';
 
 @NgModule({
   declarations: [
@@ -10,7 +11,8 @@ import { ForYouModule } from './modules/for-you/for-you.module';
   ],
   imports: [
     BrowserModule,
-    ForYouModule
+    ForYouModule,
+    OverlayModule
   ],
   providers: [],
   bootstrap: [AppComponent]

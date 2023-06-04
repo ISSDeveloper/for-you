@@ -1,16 +1,19 @@
-<div class="overlay" [style.height.px]="height">
-    <div class="overlay-video">
-        <video class="video" src="assets/video.mp4"></video>
-        <div class="video-shadow"></div>
-    </div>
+<div class="video-header">
+    <span (click)="voltar()">Voltar</span>
+    <span class="divider"></span>
+    <strong>Para você</strong>
+</div>
 
-    <div class="overlay-panel">
-        <div class="for-you-header">
-            <span (click)="close()">voltar</span>
+<div class="videos-container">
+    <div class="video">
+        <video #v src="assets/video.mp4" class="video-player"></video>
+        <div class="video-contant">
+            <div class="video-sidenav"></div>
+            <div class="video-footer"></div>
         </div>
     </div>
+</div>
 
-    <div class="overlay-footer">
-                DAODADA
-    </div>
+<div class="videos-footer">
+    oi
 </div>
