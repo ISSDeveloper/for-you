@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { DynamicRef } from 'src/app/core/services/dynamic-renderer.service';
 
 @Component({
@@ -6,21 +6,10 @@ import { DynamicRef } from 'src/app/core/services/dynamic-renderer.service';
   templateUrl: './for-you.component.html',
   styleUrls: ['./for-you.component.css']
 })
-export class ForYouComponent implements AfterViewInit {
+export class ForYouComponent {
 
-  height: number = 0;
 
-  constructor(private dynamicRef: DynamicRef<ForYouComponent>, private changeDetectorRef: ChangeDetectorRef) {
-  }
-  ngAfterViewInit(): void {
-    this.height = window.innerHeight;
-    this.changeDetectorRef.detectChanges();
-  }
-
-  @HostListener("window:resize")
-  onResize() {
-    this.height = window.innerHeight;
-    this.changeDetectorRef.detectChanges();
+  constructor(private dynamicRef: DynamicRef<ForYouComponent>) {
   }
 
   voltar() {

@@ -21,7 +21,7 @@ export class DynamicRef<T> {
 
 class DynamicRefController<T> extends DynamicRef<T> {
 
-  setParentRef(parentRef: DynamicRef<any>) {
+  setParentRef(parentRef: DynamicRef<any>): void {
     super.parentRef = parentRef;
   }
 
@@ -57,9 +57,9 @@ export class DynamicRenderer {
     const dynamicRef = new DynamicRefController<T>(this.appRef);
 
     const componentRef = this.createComponent(component, dynamicRef, parentRef);
-    const componetTemplateRef = this.getTemplateComponent(componentRef);
+    const componentTemplateRef = this.getTemplateComponent(componentRef);
 
-    this.renderer.appendChild(parent, componetTemplateRef);
+    this.renderer.appendChild(parent, componentTemplateRef);
 
     return dynamicRef;
   }
@@ -90,16 +90,16 @@ export class DynamicRenderer {
     return componentRef;
   }
 
-  private createInjector(useValue: DynamicRef<any>): Injector {
+  private createInjector(dynamicRef: DynamicRef<any>): Injector {
     return Injector.create({
       providers: [
-        { provide: DynamicRef, useValue: useValue }
+        { provide: DynamicRef, useValue: dynamicRef }
       ],
       parent: this.injector
     });
   }
 
-  private getTemplateComponent(componentRef: ComponentRef<any>) {
+  private getTemplateComponent(componentRef: ComponentRef<any>): HTMLElement {
     return (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
   }
 }
