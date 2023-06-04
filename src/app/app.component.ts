@@ -15,6 +15,6 @@ export class AppComponent {
   }
 
   show() {
-    console.log(this.dynamicRenderer.appendChildInOverlay(ForYouComponent))
+    this.dynamicRenderer.appendChild(document.body, ForYouComponent);
   }
 }

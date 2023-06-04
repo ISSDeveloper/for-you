@@ -90,7 +90,7 @@ export class DynamicRenderer {
     return componentRef;
   }
 
-  private createInjector(useValue: any): Injector {
+  private createInjector(useValue: DynamicRef<any>): Injector {
     return Injector.create({
       providers: [
         { provide: DynamicRef, useValue: useValue }
